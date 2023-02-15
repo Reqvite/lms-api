@@ -16,7 +16,10 @@ const registration = async (fullname, email, password) => {
     await user.save();
 
     return {
-      email: user.email,
+      user: {
+        email: user.email,
+        name: user.fullname,
+      },
     };
   } catch (err) {
     throw new RegistrationConflictError("Email in use");
@@ -44,6 +47,20 @@ const login = async (email, password) => {
     token,
     user: {
       email: user.email,
+      name: user.fullname,
+    },
+  };
+};
+
+const currentUser = async (token) => {
+  if (!token) {
+    throw new NotAuthorizideError("Not authorized");
+  }
+  const user = await User.findOne({ token }, { email: 1, fullname: 1, _id: 0 });
+  return {
+    user: {
+      email: user.email,
+      name: user.fullname,
     },
   };
 };
@@ -51,4 +68,5 @@ const login = async (email, password) => {
 module.exports = {
   registration,
   login,
+  currentUser,
 };
