@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
 const {
   RegistrationConflictError,
   NotAuthorizideError,
@@ -15,7 +16,21 @@ const registration = async (fullname, email, password) => {
     });
     await user.save();
 
+    const id = user._id;
+    console.log(id);
+    const token = jwt.sign(
+      {
+        _id: id,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "24h" }
+    );
+    await User.findByIdAndUpdate(id, {
+      $set: { token },
+    });
+
     return {
+      token,
       user: {
         email: user.email,
         name: user.fullname,
@@ -65,8 +80,18 @@ const currentUser = async (token) => {
   };
 };
 
+const logout = async (id) => {
+  if (!id) {
+    throw new NotAuthorizideError("Not authorized");
+  }
+  await User.findByIdAndUpdate(id, {
+    $set: { token: null },
+  });
+};
+
 module.exports = {
   registration,
   login,
   currentUser,
+  logout,
 };

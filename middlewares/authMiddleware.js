@@ -6,6 +6,7 @@ const { NotAuthorizideError } = require("../helpers/errors");
 const authMiddleware = async (req, res, next) => {
   const { authorization } = req.headers;
   const [, token] = authorization.split(" ");
+
   if (!token) {
     return next(new NotAuthorizideError("Not authorized"));
   }
@@ -17,6 +18,7 @@ const authMiddleware = async (req, res, next) => {
     }
 
     const user = await User.findOne({ _id: decodedUser._id });
+
     if (user.token !== token) {
       next(new NotAuthorizideError("Not authorized"));
     }
