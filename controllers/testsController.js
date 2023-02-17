@@ -16,9 +16,15 @@ const getUserTestsResultController = async (req, res) => {
 };
 
 const addUserTestsResultController = async (req, res) => {
-  const { email, results } = req.body;
+  const { email, results, testTitle, cipher } = req.body;
 
-  const data = await addUserTest(email, results);
+  const data = await addUserTest(
+    email,
+    results,
+    testTitle,
+    cipher,
+    req.testResult
+  );
 
   res.json({ status: "succes", code: 201, data });
 };

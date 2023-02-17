@@ -9,18 +9,22 @@ const getUserTestsResult = async (email) => {
   return userPosts;
 };
 
-const addUserTest = async (email, results) => {
+const addUserTest = async (email, results, testTitle, cipher, mark) => {
   const { fullname, _id } = await User.findOne({ email });
-
   const test = new Test({
     fullname,
     results,
+    testTitle,
+    cipher,
+    mark,
     owner: _id,
   });
 
   await test.save();
 
-  return test;
+  return {
+    mark,
+  };
 };
 
 module.exports = {

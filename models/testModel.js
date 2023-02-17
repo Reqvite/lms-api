@@ -7,7 +7,19 @@ const testSchema = new mongoose.Schema({
   },
   results: {
     type: Array,
-    default: null,
+    required: [true, "Results  is required"],
+  },
+  mark: {
+    type: String,
+    required: [true, "Mark  is required"],
+  },
+  cipher: {
+    type: String,
+    required: [true, "Cipher  is required"],
+  },
+  testTitle: {
+    type: String,
+    required: [true, "Test title  is required"],
   },
   owner: {
     type: mongoose.SchemaTypes.ObjectId,
