@@ -21,6 +21,7 @@ const testSchema = new mongoose.Schema({
     type: String,
     required: [true, "Test title  is required"],
   },
+  createdAt: { type: Date, default: Date.now },
   owner: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "User",

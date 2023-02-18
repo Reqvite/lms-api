@@ -22,11 +22,8 @@ const addUserTest = async (email, results, testTitle, cipher, mark) => {
 
   await test.save();
 
-  return {
-    mark,
-  };
+  return test;
 };
-
 module.exports = {
   addUserTest,
   getUserTestsResult,
