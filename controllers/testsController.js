@@ -2,9 +2,9 @@ const { Test } = require("../models/testModel");
 const { addUserTest, getUserTestsResult } = require("../servive/testService");
 
 const getTestsResultController = async (req, res) => {
-  const tests = await Test.find({});
+  const data = await Test.find({}).sort({ _id: -1 }).limit(20);
 
-  res.json({ status: "succes", code: 200, tests });
+  res.json({ status: "succes", code: 200, data });
 };
 
 const getUserTestsResultController = async (req, res) => {
