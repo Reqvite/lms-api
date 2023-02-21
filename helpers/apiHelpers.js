@@ -16,15 +16,17 @@ const errorHandler = (err, req, res, next) => {
 };
 
 const countTestResult = (userResults, answers) => {
+  let correct = 0;
   let total = 0;
   let count = 0;
   for (const result of userResults) {
     if (+result === +answers[count]) {
       total += 5;
+      correct += 1;
     }
     count += 1;
   }
-  return total;
+  return { correct: `${correct}/${answers.length}`, total };
 };
 
 module.exports = {

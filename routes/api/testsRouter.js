@@ -9,7 +9,7 @@ const { asyncWrapper } = require("../../helpers/apiHelpers");
 const { authMiddleware } = require("../../middlewares/authMiddleware");
 const {
   testResultMiddleware,
-} = require("../../middlewares/testResultMeddleware");
+} = require("../../middlewares/testResultMiddleware");
 
 router.use(authMiddleware);
 

@@ -17,7 +17,6 @@ const registration = async (fullname, email, password) => {
     await user.save();
 
     const id = user._id;
-    console.log(id);
     const token = jwt.sign(
       {
         _id: id,

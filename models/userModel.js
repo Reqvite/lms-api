@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  testResults: {
+    type: Array,
+    default: [],
+  },
   // avatarURL: String,
   // subscription: {
   //   type: String,

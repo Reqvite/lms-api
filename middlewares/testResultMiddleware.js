@@ -1,5 +1,3 @@
-// const { NotAuthorizideError } = require("../helpers/errors");
-
 const { countTestResult } = require("../helpers/apiHelpers");
 const { TestAnswer } = require("../models/testAnswerModel");
 

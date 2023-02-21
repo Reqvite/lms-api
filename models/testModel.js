@@ -10,7 +10,7 @@ const testSchema = new mongoose.Schema({
     required: [true, "Results  is required"],
   },
   mark: {
-    type: String,
+    type: Object,
     required: [true, "Mark  is required"],
   },
   cipher: {
