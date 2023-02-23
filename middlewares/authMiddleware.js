@@ -16,7 +16,6 @@ const authMiddleware = async (req, res, next) => {
     if (!decodedUser._id) {
       next(new NotAuthorizideError("Not authorized"));
     }
-
     const user = await User.findOne({ _id: decodedUser._id });
 
     if (user.token !== token) {

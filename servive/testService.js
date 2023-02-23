@@ -14,10 +14,9 @@ const addUserTest = async (email, results, testTitle, cipher, mark) => {
 
   const resultArray = mark.correct.split("/");
   if (resultArray[0] === resultArray[1]) {
-    const user = await User.findByIdAndUpdate(_id, {
+    await User.findByIdAndUpdate(_id, {
       $addToSet: { testResults: cipher },
     });
-    console.log(user);
   }
   const test = new Test({
     fullname,
@@ -30,7 +29,7 @@ const addUserTest = async (email, results, testTitle, cipher, mark) => {
 
   await test.save();
 
-  return test;
+  return { mark };
 };
 module.exports = {
   addUserTest,
