@@ -9,6 +9,14 @@ const getUserTestsResult = async (email) => {
   return { userTests, finishTests: testResults };
 };
 
+const getAllUsersData = async () => {
+  const data = await Test.find({}).sort({ _id: -1 });
+
+  // const userTests = await Test.find({ owner: _id }).sort({ _id: -1 }).limit(20);
+
+  return { data };
+};
+
 const addUserTest = async (email, results, testTitle, cipher, mark) => {
   const { fullname, _id } = await User.findOne({ email });
 
@@ -20,6 +28,7 @@ const addUserTest = async (email, results, testTitle, cipher, mark) => {
   }
   const test = new Test({
     fullname,
+    email,
     results,
     testTitle,
     cipher,
@@ -34,4 +43,5 @@ const addUserTest = async (email, results, testTitle, cipher, mark) => {
 module.exports = {
   addUserTest,
   getUserTestsResult,
+  getAllUsersData,
 };

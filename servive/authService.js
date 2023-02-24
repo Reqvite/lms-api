@@ -88,7 +88,6 @@ const currentUser = async (token) => {
 const userAccess = async (_id) => {
   const user = await User.findOne({ _id });
   if (user.role !== "admin") {
-    console.log(1);
     throw new NoPermissionsError(
       `403 Forbidden – you don't have permission to access this resource.`
     );

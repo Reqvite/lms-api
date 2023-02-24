@@ -1,8 +1,18 @@
 const { Test } = require("../models/testModel");
-const { addUserTest, getUserTestsResult } = require("../servive/testService");
+const {
+  addUserTest,
+  getUserTestsResult,
+  getAllUsersData,
+} = require("../servive/testService");
 
 const getTestsResultController = async (req, res) => {
   const data = await Test.find({}).sort({ _id: -1 }).limit(20);
+
+  res.json({ status: "succes", code: 200, data });
+};
+
+const getAllUsersDataController = async (req, res) => {
+  const data = await getAllUsersData();
 
   res.json({ status: "succes", code: 200, data });
 };
@@ -32,5 +42,6 @@ const addUserTestsResultController = async (req, res) => {
 module.exports = {
   getTestsResultController,
   getUserTestsResultController,
+  getAllUsersDataController,
   addUserTestsResultController,
 };

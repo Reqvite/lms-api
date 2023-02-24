@@ -5,6 +5,10 @@ const testSchema = new mongoose.Schema({
     type: String,
     required: [true, "Full name is required"],
   },
+  email: {
+    type: String,
+    required: [true, "Email is required"],
+  },
   results: {
     type: Array,
     required: [true, "Results  is required"],
