@@ -7,9 +7,11 @@ const testAnswerSchema = new mongoose.Schema({
   },
   title: {
     type: String,
+    required: [true, "Title  is required"],
   },
   answers: {
     type: Array,
+    required: [true, "Answers  are required"],
   },
   owner: {
     type: mongoose.SchemaTypes.ObjectId,

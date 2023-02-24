@@ -3,6 +3,7 @@ const {
   login,
   currentUser,
   logout,
+  userAccess,
 } = require("../servive/authService");
 
 const registrationController = async (req, res) => {
@@ -22,6 +23,11 @@ const currentUserContoller = async (req, res) => {
   res.status(200).json({ status: "OK", code: 200, data });
 };
 
+const userAccessController = async (req, res) => {
+  await userAccess(req.user._id);
+  res.status(200).json({ status: "OK", code: 200 });
+};
+
 const logoutController = async (req, res) => {
   await logout(req.user._id);
   res.status(204).json({ status: "No Content", code: 204 });
@@ -31,5 +37,6 @@ module.exports = {
   registrationController,
   loginContoller,
   currentUserContoller,
+  userAccessController,
   logoutController,
 };

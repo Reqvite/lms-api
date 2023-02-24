@@ -37,10 +37,19 @@ class RegistrationConflictError extends RestApiError {
   }
 }
 
+class NoPermissionsError extends RestApiError {
+  constructor(message) {
+    super(message);
+    this.status = 403;
+    this.type = "Forbidden";
+  }
+}
+
 module.exports = {
   RestApiError,
   WrongParametersError,
   ValidationError,
   NotAuthorizideError,
   RegistrationConflictError,
+  NoPermissionsError,
 };
