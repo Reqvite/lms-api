@@ -1,5 +1,6 @@
 const { Test } = require("../models/testModel");
 const { User } = require("../models/userModel");
+const { NoPermissionsError } = require("../helpers/errors");
 
 const getUserTestsResult = async (email) => {
   const { _id, testResults } = await User.findOne({ email });
@@ -8,8 +9,14 @@ const getUserTestsResult = async (email) => {
 
   return { userTests, finishTests: testResults };
 };
+const getAllUsersData = async (_id) => {
+  const user = await User.findById({ _id });
 
-const getAllUsersData = async () => {
+  if (user.role !== "admin") {
+    throw new NoPermissionsError(
+      "403 Forbidden – you dont have permission to access this resource."
+    );
+  }
   const data = await Test.find({}).sort({ _id: -1 });
 
   // const userTests = await Test.find({ owner: _id }).sort({ _id: -1 }).limit(20);
@@ -26,6 +33,7 @@ const addUserTest = async (email, results, testTitle, cipher, mark) => {
       $addToSet: { testResults: cipher },
     });
   }
+
   const test = new Test({
     fullname,
     email,
