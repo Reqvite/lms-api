@@ -9,17 +9,27 @@ const getUserTestsResult = async (email) => {
 
   return { userTests, finishTests: testResults };
 };
-const getAllUsersData = async (_id) => {
+
+const getAllUsersData = async (_id, email, page, limit) => {
   const user = await User.findById({ _id });
-
   if (user.role !== "admin") {
-    throw new NoPermissionsError(
-      "403 Forbidden – you dont have permission to access this resource."
-    );
+    throw new NoPermissionsError("403 Forbidden");
   }
-  const data = await Test.find({}).sort({ _id: -1 });
 
-  // const userTests = await Test.find({ owner: _id }).sort({ _id: -1 }).limit(20);
+  let searchParams;
+
+  if (email?.includes("@")) {
+    searchParams = email ? { email } : {};
+  } else {
+    const fullname = email;
+    searchParams = fullname ? { fullname } : {};
+  }
+
+  const skip = (page - 1) * limit;
+  const data = await Test.find(searchParams)
+    .skip(skip)
+    .limit(limit)
+    .sort({ _id: -1 });
 
   return { data };
 };

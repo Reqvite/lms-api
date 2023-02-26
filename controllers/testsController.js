@@ -12,7 +12,8 @@ const getTestsResultController = async (req, res) => {
 };
 
 const getAllUsersDataController = async (req, res) => {
-  const data = await getAllUsersData(req.user._id);
+  const { email, page, limit } = req.query;
+  const data = await getAllUsersData(req.user._id, email, page, limit);
   res.json({ status: "succes", code: 200, data });
 };
 
