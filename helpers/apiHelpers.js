@@ -20,7 +20,7 @@ const countTestResult = (userResults, answers) => {
   let total = 0;
   let count = 0;
   for (const result of userResults) {
-    if (+result === +answers[count]) {
+    if (+result.idx === +answers[count].idx) {
       total += 5;
       correct += 1;
     }

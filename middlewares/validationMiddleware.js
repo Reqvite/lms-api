@@ -9,11 +9,7 @@ module.exports = {
         .min(4)
         .max(100)
         .regex(/^[a-zA-Zа-яА-ЯіІїЇєЄ]+\s[a-zA-Zа-яА-ЯіІїЇєЄ]+$/)
-        .error(
-          new ValidationError(
-            "Full name must contain both first name and last name and only contain letters."
-          )
-        ),
+        .error(new ValidationError("Повне ім'я має містити ім'я та прізвище")),
       email: Joi.string()
         .email({
           minDomainSegments: 2,

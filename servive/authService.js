@@ -37,14 +37,14 @@ const registration = async (fullname, email, password) => {
       },
     };
   } catch (err) {
-    throw new RegistrationConflictError("Email in use");
+    throw new RegistrationConflictError("E-mail вже використовується");
   }
 };
 
 const login = async (email, password) => {
   const user = await User.findOne({ email });
   if (!user || !(await bcrypt.compare(password, user.password))) {
-    throw new NotAuthorizideError("Email or password is wrong");
+    throw new NotAuthorizideError("Електронна пошта або пароль некоректні");
   }
 
   const id = user._id;
