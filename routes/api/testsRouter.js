@@ -3,7 +3,6 @@ const {
   getTestsResultController,
   addUserTestsResultController,
   getUserTestsResultController,
-  getAllUsersDataController,
 } = require("../../controllers/testsController");
 const router = express.Router();
 const { asyncWrapper } = require("../../helpers/apiHelpers");
@@ -15,7 +14,6 @@ const {
 router.use(authMiddleware);
 
 router.get("/", asyncWrapper(getTestsResultController));
-router.get("/full-data", asyncWrapper(getAllUsersDataController));
 router.get("/user", asyncWrapper(getUserTestsResultController));
 router.post(
   "/",

@@ -1,19 +1,9 @@
 const { Test } = require("../models/testModel");
-const {
-  addUserTest,
-  getUserTestsResult,
-  getAllUsersData,
-} = require("../servive/testService");
+const { addUserTest, getUserTestsResult } = require("../servive/testService");
 
 const getTestsResultController = async (req, res) => {
   const data = await Test.find({}).sort({ _id: -1 }).limit(20);
 
-  res.json({ status: "succes", code: 200, data });
-};
-
-const getAllUsersDataController = async (req, res) => {
-  const { email, page, limit } = req.query;
-  const data = await getAllUsersData(req.user._id, email, page, limit);
   res.json({ status: "succes", code: 200, data });
 };
 
@@ -42,6 +32,5 @@ const addUserTestsResultController = async (req, res) => {
 module.exports = {
   getTestsResultController,
   getUserTestsResultController,
-  getAllUsersDataController,
   addUserTestsResultController,
 };

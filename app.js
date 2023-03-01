@@ -5,6 +5,7 @@ const cors = require("cors");
 const { errorHandler } = require("./helpers/apiHelpers");
 const { authRouter } = require("./routes/api/authRouter");
 const { testsRouter } = require("./routes/api/testsRouter");
+const { adminRouter } = require("./routes/api/adminRouter");
 
 require("dotenv").config();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.use("/api/users", authRouter);
 app.use("/api/tests", testsRouter);
+app.use("/api/admin", adminRouter);
 
 app.use(errorHandler);
 
