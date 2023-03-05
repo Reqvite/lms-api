@@ -1,8 +1,12 @@
-const { getAllUsersData, getUsers } = require("../servive/adminService");
+const {
+  getAllUsersTests,
+  getUsers,
+  removeUser,
+} = require("../servive/adminService");
 
-const getAllUsersDataController = async (req, res) => {
+const getAllUsersTestsController = async (req, res) => {
   const { email, page, limit } = req.query;
-  const data = await getAllUsersData(email, page, limit);
+  const data = await getAllUsersTests(email, page, limit);
   res.json({ status: "succes", code: 200, data });
 };
 
@@ -11,7 +15,18 @@ const getUsersController = async (req, res) => {
   res.json({ status: "succes", code: 200, data });
 };
 
+const removeUserController = async (req, res, next) => {
+  const data = await removeUser(req.params.userId);
+  res.json({
+    status: "success",
+    code: 200,
+    data,
+    message: "User deleted",
+  });
+};
+
 module.exports = {
-  getAllUsersDataController,
+  getAllUsersTestsController,
   getUsersController,
+  removeUserController,
 };
