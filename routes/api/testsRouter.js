@@ -14,7 +14,7 @@ const {
 router.use(authMiddleware);
 
 router.get("/", asyncWrapper(getTestsResultController));
-router.get("/user", asyncWrapper(getUserTestsResultController));
+router.get("/user-tests", asyncWrapper(getUserTestsResultController));
 router.post(
   "/",
   testResultMiddleware,
