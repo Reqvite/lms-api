@@ -36,7 +36,7 @@ const removeUser = async (userId) => {
     throw new WrongParametersError(`Not found`);
   }
 
-  await Test.deleteMany({ user: userId });
+  await Test.deleteMany({ owner: user._id });
 
   return { userId };
 };
