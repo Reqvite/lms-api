@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    testStatistics: {
+      type: Array,
+      default: [0, 0],
+    },
     role: {
       type: String,
       enum: ["admin", "student"],
