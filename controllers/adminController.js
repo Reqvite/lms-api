@@ -5,8 +5,8 @@ const {
 } = require("../servive/adminService");
 
 const getAllUsersTestsController = async (req, res) => {
-  const { email, page, limit } = req.query;
-  const data = await getAllUsersTests(email, page, limit);
+  const { email, startDate, endDate } = req.query;
+  const data = await getAllUsersTests(email, startDate, endDate);
   res.json({ status: "succes", code: 200, data });
 };
 

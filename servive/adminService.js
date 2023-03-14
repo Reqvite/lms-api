@@ -2,9 +2,8 @@ const { WrongParametersError } = require("../helpers/errors");
 const { Test } = require("../models/testModel");
 const { User } = require("../models/userModel");
 
-const getAllUsersTests = async (email, page, limit) => {
+const getAllUsersTests = async (email, startDate, endDate) => {
   let searchParams;
-
   if (email?.includes("@")) {
     searchParams = email ? { email } : {};
   } else {
@@ -12,11 +11,20 @@ const getAllUsersTests = async (email, page, limit) => {
     searchParams = fullname ? { fullname } : {};
   }
 
-  const skip = (page - 1) * limit;
-  const data = await Test.find(searchParams)
-    .skip(skip)
-    .limit(limit)
-    .sort({ _id: -1 });
+  if (!email && !startDate && !endDate) {
+    searchParams = {};
+  } else if (email && !startDate && !endDate) {
+    searchParams = { email };
+  } else if (!email && startDate && endDate) {
+    searchParams = { createdAt: { $gte: startDate, $lte: endDate } };
+  } else {
+    searchParams = {
+      email,
+      createdAt: { $gte: startDate, $lte: endDate },
+    };
+  }
+
+  const data = await Test.find(searchParams).sort({ _id: -1 });
 
   return { data };
 };
