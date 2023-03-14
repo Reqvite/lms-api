@@ -4,12 +4,6 @@ const { User } = require("../models/userModel");
 
 const getAllUsersTests = async (email, startDate, endDate) => {
   let searchParams;
-  if (email?.includes("@")) {
-    searchParams = email ? { email } : {};
-  } else {
-    const fullname = email;
-    searchParams = fullname ? { fullname } : {};
-  }
 
   if (!email && !startDate && !endDate) {
     searchParams = {};
